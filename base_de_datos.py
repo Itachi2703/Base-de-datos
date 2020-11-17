@@ -39,8 +39,6 @@ try:
 except:
     print('Opcion de valor invalida')
 
-cursor.execute("UPDATE USER SET NAME=Fred WHERE ID='7'")
-print('Cambiado')
 conection.commit()
 conection.close()
 print('Finish')
