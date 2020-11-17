@@ -1,11 +1,11 @@
 import sqlite3
 
-conection = sqlite3.connect('MiDB')
-cursor = conection.cursor()
+conection = sqlite3.connect('MiDB') #Creamos y nos conectamos ala base de datos
+cursor = conection.cursor() #Cramos un cursor
 
-#cursor.execute("CREATE TABLE USER(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20) UNIQUE, OLDYEAR INTEGER)")
-def agregar():
-    try:
+#cursor.execute("CREATE TABLE USER(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20) UNIQUE, OLDYEAR INTEGER)")  Creacion de la tabla 
+def agregar():#Inicio de la funcion para agregar dator
+    try:#Manejo de error de valores
         cantidad = int(input('Cuantos datos desea agregar: '))
         i = 1
         while i <= cantidad:
@@ -19,12 +19,14 @@ def agregar():
             cursor.executemany("INSERT INTO USER VALUES (NULL,?,?)", variable)
             conection.commit()
     except:
-        print('Error De valores')
-def mostrar():
+        print('Error De valores')#Fin de la funcion
+        
+
+def mostrar():#Inicio funcion para mostrar
     cursor.execute("SELECT * FROM USER")
     variable_users = cursor.fetchall()
     for user in variable_users:
-        print('ID user: ', user[0], '||','Name user: ', user[1], '||','Old year user: ', user[2])
+        print('ID user: ', user[0], '||','Name user: ', user[1], '||','Old year user: ', user[2])#Fin de la funcion
 
 print('1.Add to data base', '2. show data base')
 
