@@ -4,6 +4,9 @@ conection = sqlite3.connect('MiDB') #Creamos y nos conectamos ala base de datos
 cursor = conection.cursor() #Cramos un cursor
 
 #cursor.execute("CREATE TABLE USER(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20) UNIQUE, OLDYEAR INTEGER)")  Creacion de la tabla 
+
+
+
 def agregar():#Inicio de la funcion para agregar dator
     try:#Manejo de error de valores
         cantidad = int(input('Cuantos datos desea agregar: '))
