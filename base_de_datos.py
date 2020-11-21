@@ -1,3 +1,4 @@
+#Antes de hacer el import, tenemos que ejecutar el comando pip install sqlite3, en la consola
 import sqlite3
 
 conection = sqlite3.connect('MiDB') #Creamos y nos conectamos ala base de datos
