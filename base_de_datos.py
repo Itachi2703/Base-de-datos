@@ -1,6 +1,25 @@
 #Antes de hacer el import, tenemos que ejecutar el comando pip install sqlite3, en la consola
 import sqlite3
 from tqdm import tqdm
+import smtplib
+
+def sendmailnow():
+    print("Solo falta configurar el usuario y contrasena y ya se puede usar")
+    try:
+        message = str(input("Mensaje: "))
+        destintario = str(input("destintario: "))
+
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+
+        server.login("Your mail", "Your password")
+
+        server.sendmail("addressee", destintario, message)
+        server.quit()
+        print("Finish")
+    except:
+        print("Error en sendmailnow")
+
 
 def barload():
     for i in tqdm(range(int(9e6))):
@@ -39,7 +58,7 @@ def mostrar():#Inicio funcion para mostrar
     for user in variable_users:
         print('ID user: ', user[0], '||','Name user: ', user[1], '||','Old year user: ', user[2])#Fin de la funcion
 
-print('1.Add to data base', '2. show data base')
+print('1.Add to data base', '2. show data base', "3.enviar correo")
 
 option = str(input('Option: '))
 try:
@@ -47,6 +66,8 @@ try:
         agregar()
     elif option == '2':
         mostrar()
+    elif option == "3":
+        sendmailnow()
     else:
         print("     ", option, 'Invalida')
 except:
