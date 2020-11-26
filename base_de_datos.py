@@ -2,6 +2,10 @@
 import sqlite3
 from tqdm import tqdm
 
+def barload():
+    for i in tqdm(range(int(9e6))):
+        pass
+
 
 
 conection = sqlite3.connect('MiDB') #Creamos y nos conectamos ala base de datos
@@ -22,11 +26,14 @@ def agregar():#Inicio de la funcion para agregar dator
                 ]
             cursor.executemany("INSERT INTO USER VALUES (NULL,?,?)", variable)
             conection.commit()
+            barload()#Simulador de carga
+            print("FINISH")
     except:
         print('Error De valores')#Fin de la funcion
         
 
 def mostrar():#Inicio funcion para mostrar
+    barload()
     cursor.execute("SELECT * FROM USER")
     variable_users = cursor.fetchall()
     for user in variable_users:
