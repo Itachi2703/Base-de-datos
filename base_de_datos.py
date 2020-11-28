@@ -3,6 +3,9 @@ import sqlite3
 from tqdm import tqdm
 import smtplib
 
+
+
+
 def sendmailnow():
     print("Solo falta configurar el usuario y contrasena y ya se puede usar")
     try:
@@ -22,7 +25,7 @@ def sendmailnow():
 
 
 def barload():
-    for i in tqdm(range(int(9e6))):
+    for i in tqdm(range(int(9e6)), ascii = True, desc = "Loading.."):
         pass
 
 
@@ -55,31 +58,32 @@ def agregar():#Inicio de la funcion para agregar dator
         
 #Search Person
 def search():
-    ID = int(input("ID of the User: "))
-    print(cursor.execute("SELECT ID=2 FROM USER"))
-    
+    iduser = str(input("ID of the User: "))
+    cursor.execute("SELECT * FROM USER WHERE ID={0}".format(iduser))
+    data = cursor.fetchone()
+    print('|','Id user:', data[0], ' ', '\t', 'Name user: ',data[1], '\t','old year: ', data[2], '\t', '|')
+
 def mostrar():#Inicio funcion para mostrar
-    barload()
     cursor.execute("SELECT * FROM USER")
     variable_users = cursor.fetchall()
     for user in variable_users:
-        print('ID user: ', user[0], '||','Name user: ', user[1], '||','Old year user: ', user[2])#Fin de la funcion
-
+        print('-'*74)
+        print('|','ID user: ', user[0], ' ','\t', 'Name user: ', user[1], '\t', 'Old year user: ', user[2],'\t', '|')#Fin de la funcion
+    print('-'*74)
 print('1.Add to data base', '2. show data base', "3.enviar correo, 4.Mostrar dato especifico por ID")
 
 option = str(input('Option: '))
-try:
-    if option == '1':
-        agregar()
-    elif option == '2':
-        mostrar()
-    elif option == "3":
-        sendmailnow()
-    elif option == "4":
-        search()
-    else:
-        print("     ", option, 'Invalida')
-except:
+
+if option == '1':
+    agregar()
+elif option == '2':
+    mostrar()
+elif option == "3":
+    sendmailnow()
+elif option == "4":
+    search()
+else:
+    print("     ", option, 'Invalida')
     print('Opcion de valor invalida')
 
 conection.commit()
