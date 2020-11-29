@@ -35,7 +35,7 @@ cursor = conection.cursor() #Cramos un cursor
 
 #cursor.execute("CREATE TABLE USER(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20) UNIQUE, OLDYEAR INTEGER)")  Creacion de la tabla 
 
-
+print('Hola rama am')
 
 def agregar():#Inicio de la funcion para agregar dator
     try:#Manejo de error de valores
