@@ -70,7 +70,7 @@ def mostrar():#Inicio funcion para mostrar
         print('-'*74)
         print('|','ID user: ', user[0], ' ','\t', 'Name user: ', user[1], '\t', 'Old year user: ', user[2],'\t', '|')#Fin de la funcion
     print('-'*74)
-print('1.Add to data base', '2. show data base', "3.enviar correo, 4.Mostrar dato especifico por ID")
+print('1.Add to data base', '\n', '2. show data base', '\n', "3.enviar correo", '\n', "4.Mostrar dato especifico por ID")
 
 option = str(input('Option: '))
 
