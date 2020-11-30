@@ -26,8 +26,8 @@ class dbcone:
                     ]
                 cursor.executemany("INSERT INTO USER VALUES (NULL,?,?)", variable)
                 conection.commit()#Simulador de carga
-                dbcone.barload()
-                print("FINISH")
+            dbcone.barload()
+            print("FINISH")
             conection.commit()
         except:
             print('Error de dato')
