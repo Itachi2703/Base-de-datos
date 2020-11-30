@@ -1,5 +1,5 @@
 from moduleSearchbyId import sendmail
-from barloads import barloadd
+
 from FolderDB import DBcon
 
 print('1.Add to data base', '\n', '2. show data base', '\n', "3.enviar correo", '\n', "4.Mostrar dato especifico por ID",'\n', '5.Cambiar Nombre o edad')

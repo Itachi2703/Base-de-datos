@@ -1,15 +1,16 @@
 from tqdm import tqdm
 import sqlite3
+ 
+
+
 
 conection = sqlite3.connect('dbnew') #Creamos y nos conectamos ala base de datos
 cursor = conection.cursor() #Cramos un cursor
 
 #cursor.execute("CREATE TABLE USER(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20) , OLDYEAR INTEGER)") #Creacion de la tabla 
-print('Db created')
-print('Hola rama am')
 class dbcone:
     def barload():
-        for i in tqdm(range(int(9e6)), ascii = True, desc = "Loading.."):
+        for i in tqdm(range(int(8e6)), ascii = True, desc = "Loading.."):
             pass
 
     def agregar():#Inicio de la funcion para agregar dator

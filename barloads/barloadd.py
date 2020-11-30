@@ -1,4 +1,8 @@
 from tqdm import tqdm
-def barload():
-    for i in tqdm(range(int(9e6)), ascii = True, desc = "Loading.."):
-        pass
+from time import sleep
+
+def barloadnew():
+    for i in tqdm(range(0, 100), desc ="Text You Want"): 
+        sleep(.1) 
+
+barloadnew()
