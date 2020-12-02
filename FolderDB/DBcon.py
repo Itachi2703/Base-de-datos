@@ -7,9 +7,30 @@ import sqlite3
 conection = sqlite3.connect('dbnew') #Creamos y nos conectamos ala base de datos
 cursor = conection.cursor() #Cramos un cursor
 
-#cursor.execute("CREATE TABLE USER(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20) , OLDYEAR INTEGER)") #Creacion de la tabla 
-class dbcone:
+def tablaaa():
+    try:
+        i = 1
+        varndt = int(input('Numbrs of tables: '))
+        while i <= varndt:
+            i = i + 1
+            vartab = str(input("Name of the table: "))
+            cursor.execute("INSERT INTO TABLASNEWS VALUES ('{0}')".format(vartab))
+            conection.commit()
+    except:
+        print('Error de dato lineas 10-1')
 
+class dbcone:
+    def creartable():
+        print('1.SI     2.NO')
+        creart = str(input('Desea crear una nueva tabla: '))
+        if creart == '1':
+            ndlt = str(input('Nombre de la tabla: '))
+            cursor.execute("CREATE TABLE {0}(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20) , OLDYEAR INTEGER)".format(ndlt)) #Creacion de la tabla 
+            print('Tabla creada')
+        elif creart == '2':
+            print("OK")
+        else:
+            print('Opcion Invalida')
     def agregar():#Inicio de la funcion para agregar dator
         try:
             cantidad = int(input('Cuantos datos desea agregar: '))
@@ -30,13 +51,15 @@ class dbcone:
             print('Error de dato')
     #Search Person
     def search():
-        iduser = str(input("ID of the User: "))
+        try:
+            iduser = str(input("ID of the User: "))
         
-        cursor.execute("SELECT * FROM USER WHERE ID={0}".format(iduser))
-        data = cursor.fetchone()
-        print('|','Id user:', data[0], ' ', '\t', 'Name user: ',data[1], '\t','old year: ', data[2], '\t', '|')
-        conection.commit()
-
+            cursor.execute("SELECT * FROM USER WHERE ID={0}".format(iduser))
+            data = cursor.fetchone()
+            print('|','Id user:', data[0], ' ', '\t', 'Name user: ',data[1], '\t','old year: ', data[2], '\t', '|')
+            conection.commit()
+        except:
+            print('La opcion ', iduser, 'Es Invalida')
     def mostrar():#Inicio funcion para mostrar
         
         cursor.execute("SELECT * FROM USER")
