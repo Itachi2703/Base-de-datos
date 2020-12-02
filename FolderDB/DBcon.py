@@ -1,4 +1,4 @@
-from tqdm import tqdm
+
 import sqlite3
  
 
@@ -9,9 +9,6 @@ cursor = conection.cursor() #Cramos un cursor
 
 #cursor.execute("CREATE TABLE USER(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20) , OLDYEAR INTEGER)") #Creacion de la tabla 
 class dbcone:
-    def barload():
-        for i in tqdm(range(int(8e6)), ascii = True, desc = "Loading.."):
-            pass
 
     def agregar():#Inicio de la funcion para agregar dator
         try:
@@ -27,7 +24,6 @@ class dbcone:
                     ]
                 cursor.executemany("INSERT INTO USER VALUES (NULL,?,?)", variable)
                 conection.commit()#Simulador de carga
-            dbcone.barload()
             print("FINISH")
             conection.commit()
         except:
@@ -35,14 +31,14 @@ class dbcone:
     #Search Person
     def search():
         iduser = str(input("ID of the User: "))
-        dbcone.barload()
+        
         cursor.execute("SELECT * FROM USER WHERE ID={0}".format(iduser))
         data = cursor.fetchone()
         print('|','Id user:', data[0], ' ', '\t', 'Name user: ',data[1], '\t','old year: ', data[2], '\t', '|')
         conection.commit()
 
     def mostrar():#Inicio funcion para mostrar
-        dbcone.barload()
+        
         cursor.execute("SELECT * FROM USER")
         variable_users = cursor.fetchall()
         for user in variable_users:
@@ -52,7 +48,7 @@ class dbcone:
     def cambiaruser():
         try:
             dbcone.mostrar()
-            print("1.Cambiar nombre", '\t', '2.Cambiar edad')
+            print("1.Cambiar nombre", '\t', '2.Cambiar edad', '\t', '3.Borrar por ID')
             cambiarop = str(input('Eliga opcion: '))
             if cambiarop == '1':
                 iddu = str(input('Id of the user to change: '))
@@ -83,9 +79,30 @@ class dbcone:
                     print('Entonces ejecute nuevamente')
                 else:
                     print(siono, 'Opcion Invalida')
+            elif cambiarop == '3':
+                iddu = str(input('Id user to delet: '))
+                cursor.execute("SELECT * FROM USER WHERE ID={0}".format(iddu))
+                data = cursor.fetchone()
+                print('1.SI, 2.N0')
+                print('|','Id user:', data[0], ' ', '\t', 'Name user: ',data[1], '\t','old year: ', data[2], '\t', '|')
+                siono = str(input('Este es el usuario que eligio: '))
+                if siono == '1':
+                    print('1.SI, 2.N0')
+                    seguro = str(input('Esta seguro que desea borrar: '))
+                    if seguro == '1':
+                        cursor.execute("DELETE FROM USER WHERE ID={0}".format(iddu))
+                        print('Usuario borrado')
+                    elif seguro == '2':
+                        print('Ejecute de Nuevo')
+                    else:
+                        print('Opcion Invalida')
+                elif siono == '2':
+                    print('Ejecute de Nuevo')
+                else:
+                    print('Valor Invado')
             else:
                 print(cambiarop, 'Opcion Invalida')
-            dbcone.barload()
+            
             print('FINISH')
             conection.commit()
         except:
