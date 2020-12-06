@@ -1,6 +1,5 @@
 
 import sqlite3
- 
 
 
 
@@ -9,7 +8,7 @@ cursor = conection.cursor() #Cramos un cursor
 
 class dbcone:
     def creartable():
-        print('1.SI     2.Shoe tables   3.No   ')
+        print('1.SI     2.Show tables   3.No   ')
         creart = str(input('Desea crear una nueva tabla: '))
         if creart == '1':
             ndlt = str(input('Nombre de la tabla: '))
