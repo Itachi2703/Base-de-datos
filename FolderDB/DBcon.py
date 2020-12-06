@@ -1,48 +1,32 @@
 
 import sqlite3
+import random
+
+IDNEW = random.randint(1000000, 1000000000000)
 
 
 
 conection = sqlite3.connect('dbnew') #Creamos y nos conectamos ala base de datos
 cursor = conection.cursor() #Cramos un cursor
-
+cursor.execute("CREATE TABLE USER (ID INTEGER PRIMARY KEY UNIQUE, NAME VARCHAR(20), OLDYEAR INTEGER)")
+print("DB CREATED")
 class dbcone:
-    def creartable():
-        print('1.SI     2.Show tables   3.No   ')
-        creart = str(input('Desea crear una nueva tabla: '))
-        if creart == '1':
-            ndlt = str(input('Nombre de la tabla: '))
-            cursor.execute("CREATE TABLE {0}(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20) , OLDYEAR INTEGER)".format(ndlt)) #Creacion de la tabla 
-            cursor.execute("INSERT INTO TABLASNEWS VALUES ('{0}')".format(ndlt))
-            print('Tabla creada')
-            conection.commit()
-        elif creart == "2":
-            cursor.execute("SELECT * FROM TABLASNEWS")
-            data = cursor.fetchall()
-            for tabless in data:
-                print("Name of the table: ", tabless[0])
-        elif creart == '3':
-            print("OK")
-        else:
-            print('Opcion Invalida')
     def agregar():#Inicio de la funcion para agregar dator
-        try:
-            cantidad = int(input('Cuantos datos desea agregar: '))
-            i = 1
-            while i <= cantidad:
-                i = i + 1
-                name = str(input('Your name: '))
-                old_year = int(input('Your old year: '))
-                print('='*10, '\n', 'Nuevos Datos', '\n','='*10)
-                variable = [
-                    (name,old_year)
-                    ]
-                cursor.executemany("INSERT INTO USER VALUES (NULL,?,?)", variable)
-                conection.commit()#Simulador de carga
+        cantidad = int(input('Cuantos datos desea agregar: '))
+        i = 0
+        while i <= cantidad:
+            i = i + 1
+            name = str(input('Your name: '))
+            old_year = int(input('Your old year: '))
+            print('='*10, '\n', 'Nuevos Datos', '\n','='*10)
+            variable = [
+            (IDNEW,name,old_year)
+                ]
+            cursor.executemany("INSERT INTO USER VALUES (?,?,?)", variable)
+            conection.commit()#Simulador de carga
             print("FINISH")
             conection.commit()
-        except:
-            print('Error de dato')
+        print('Error de dato')
     #Search Person
     def search():
         try:
@@ -60,7 +44,7 @@ class dbcone:
         variable_users = cursor.fetchall()
         for user in variable_users:
             print('-'*74)
-            print('|','ID user: ', user[0], ' ','\t', 'Name user: ', user[1], ' ','\t', 'Old year user: ', user[2],'\t', '|')#Fin de la funcion
+            print('|','ID user: ', user[0], '  ','\t', 'Name user: ', user[1], ' ','\t', 'Old year user: ', user[2]," ",'\t', " ",'|')#Fin de la funcion
         print('-'*74)
     def cambiaruser():
         try:

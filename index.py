@@ -14,8 +14,6 @@ elif option == "4":
     DBcon.dbcone.search()
 elif option == '5':
     DBcon.dbcone.cambiaruser()
-elif option == '6':
-    DBcon.dbcone.creartable()
 else:
     print("     ", option, 'Invalida')
     print('Opcion de valor invalida')
