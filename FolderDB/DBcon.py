@@ -65,7 +65,7 @@ class dbcone:
     def cambiaruser():
         try:
             dbcone.mostrar()
-            print("1.Cambiar nombre", '\t', '2.Cambiar edad', '\t', '3.Borrar por ID')
+            print("1.Cambiar nombre", '\t', '2.Cambiar edad', '\t', '3.Borrar por ID', "\t", "4.Delet datas of the table")
             cambiarop = str(input('Eliga opcion: '))
             if cambiarop == '1':
                 iddu = str(input('Id of the user to change: '))
@@ -117,6 +117,19 @@ class dbcone:
                     print('Ejecute de Nuevo')
                 else:
                     print('Valor Invado')
+            elif cambiarop == "4":
+                cursor.execute("SELECT * FROM TABLASNEWS")
+                data = cursor.fetchall()
+                for tabless in data:
+                    print("Name of the table: ", tabless[0])
+                print("1.SI", "\t", "2.NO")
+                obdt = str(input("Desea borrar los datos de la tabla: "))
+                namofthetable = str(input("Name of the table: "))
+                if obdt == "1":
+                    cursor.execute("DROP TABLE '{0}'".format(namofthetable))
+                    print("Datos borrados")#option 2 not created ok 
+                elif obdt == "2":
+                    print("OK")
             else:
                 print(cambiarop, 'Opcion Invalida')
             
