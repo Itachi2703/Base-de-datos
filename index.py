@@ -17,6 +17,5 @@ elif option == '5':
 elif option == '6':
     DBcon.dbcone.creartable()
 else:
-    DBcon.tablaaa()
     print("     ", option, 'Invalida')
     print('Opcion de valor invalida')

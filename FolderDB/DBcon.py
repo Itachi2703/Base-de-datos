@@ -7,27 +7,22 @@ import sqlite3
 conection = sqlite3.connect('dbnew') #Creamos y nos conectamos ala base de datos
 cursor = conection.cursor() #Cramos un cursor
 
-def tablaaa():
-    try:
-        i = 1
-        varndt = int(input('Numbrs of tables: '))
-        while i <= varndt:
-            i = i + 1
-            vartab = str(input("Name of the table: "))
-            cursor.execute("INSERT INTO TABLASNEWS VALUES ('{0}')".format(vartab))
-            conection.commit()
-    except:
-        print('Error de dato lineas 10-1')
-
 class dbcone:
     def creartable():
-        print('1.SI     2.NO')
+        print('1.SI     2.Shoe tables   3.No   ')
         creart = str(input('Desea crear una nueva tabla: '))
         if creart == '1':
             ndlt = str(input('Nombre de la tabla: '))
             cursor.execute("CREATE TABLE {0}(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20) , OLDYEAR INTEGER)".format(ndlt)) #Creacion de la tabla 
+            cursor.execute("INSERT INTO TABLASNEWS VALUES ('{0}')".format(ndlt))
             print('Tabla creada')
-        elif creart == '2':
+            conection.commit()
+        elif creart == "2":
+            cursor.execute("SELECT * FROM TABLASNEWS")
+            data = cursor.fetchall()
+            for tabless in data:
+                print("Name of the table: ", tabless[0])
+        elif creart == '3':
             print("OK")
         else:
             print('Opcion Invalida')
