@@ -1,124 +1,111 @@
 
 import sqlite3
-import random
-
-IDNEW = random.randint(1000000, 1000000000000)
 
 
 
 conection = sqlite3.connect('dbnew') #Creamos y nos conectamos ala base de datos
 cursor = conection.cursor() #Cramos un cursor
-cursor.execute("CREATE TABLE USER (ID INTEGER PRIMARY KEY UNIQUE, NAME VARCHAR(20), OLDYEAR INTEGER)")
-print("DB CREATED")
-class dbcone:
-    def agregar():#Inicio de la funcion para agregar dator
-        cantidad = int(input('Cuantos datos desea agregar: '))
-        i = 0
-        while i <= cantidad:
-            i = i + 1
-            name = str(input('Your name: '))
-            old_year = int(input('Your old year: '))
-            print('='*10, '\n', 'Nuevos Datos', '\n','='*10)
-            variable = [
-            (IDNEW,name,old_year)
-                ]
-            cursor.executemany("INSERT INTO USER VALUES (?,?,?)", variable)
-            conection.commit()#Simulador de carga
-            print("FINISH")
-            conection.commit()
-        print('Error de dato')
-    #Search Person
-    def search():
+#cursor.execute("CREATE TABLE USER (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20), OLDYEAR INTEGER, JOB VARCHAR(20), SalaryBYhr INTEGER, SalaryBYWeek INTEGER)")
+
+print("db created")
+
+class dbs:#clase de todas las operaciones sobre la base de datos
+
+
+
+    def user_by_ID():
         try:
-            iduser = str(input("ID of the User: "))
-        
-            cursor.execute("SELECT * FROM USER WHERE ID={0}".format(iduser))
+            id_of_the_user = str(input("Id of the user: "))
+            cursor.execute("SELECT * FROM USER WHERE ID={0}".format(id_of_the_user))
             data = cursor.fetchone()
-            print('|','Id user:', data[0], ' ', '\t', 'Name user: ',data[1], '\t','old year: ', data[2], '\t', '|')
+            print("="*20)
+            print("ID: ", data[0], "NAME: ", data[1], "AGE: ", data[2], "JOBS",data[3], "salary by hr: ", data[4], "salary by week: ", data[5])
             conection.commit()
         except:
-            print('La opcion ', iduser, 'Es Invalida')
-    def mostrar():#Inicio funcion para mostrar
-        
-        cursor.execute("SELECT * FROM USER")
-        variable_users = cursor.fetchall()
-        for user in variable_users:
-            print('-'*74)
-            print('|','ID user: ', user[0], '  ','\t', 'Name user: ', user[1], ' ','\t', 'Old year user: ', user[2]," ",'\t', " ",'|')#Fin de la funcion
-        print('-'*74)
-    def cambiaruser():
+            print(id_of_the_user, "not valid")
+    def add_to_db():
         try:
-            dbcone.mostrar()
-            print("1.Cambiar nombre", '\t', '2.Cambiar edad', '\t', '3.Borrar por ID', "\t", "4.Delet datas of the table")
-            cambiarop = str(input('Eliga opcion: '))
-            if cambiarop == '1':
-                iddu = str(input('Id of the user to change: '))
-                cursor.execute("SELECT * FROM USER WHERE ID={0}".format(iddu))
-                data = cursor.fetchone()
-                print('|','Id user:', data[0], ' ', '\t', 'Name user: ',data[1], '\t','old year: ', data[2], '\t', '|')
-                print('1.SI','\n', '2.N0')
-                siono = str(input("Este es el usuario que eligio: "))
-                if siono == "1":
-                    namecha = str(input('New name: '))
-                    cursor.execute("UPDATE USER SET NAME='{0}' WHERE ID={1}".format(namecha, iddu))
-                elif siono == '2':
-                    print('Entonces ejecute nuevamente')
-                else:
-                    print(siono, 'Opcion Invalida')
-            elif cambiarop == '2':
-                iddu = str(input('Id of the user to change: '))
-                cursor.execute("SELECT * FROM USER WHERE ID={0}".format(iddu))
-                data = cursor.fetchone()
-                print('|','Id user:', data[0], ' ', '\t', 'Name user: ',data[1], '\t','old year: ', data[2], '\t', '|')
-                print('Este es usuario que eligio')
-                print('1.SI','\n', '2.N0')
-                siono = str(input("Este es el usuario que eligio: "))
-                if siono == '1':
-                    newage = str(input('Cual es el nueva edad: '))
-                    cursor.execute("UPDATE USER SET OLDYEAR={0} WHERE ID={1}".format(newage, iddu))
-                elif siono == '2':
-                    print('Entonces ejecute nuevamente')
-                else:
-                    print(siono, 'Opcion Invalida')
-            elif cambiarop == '3':
-                iddu = str(input('Id user to delet: '))
-                cursor.execute("SELECT * FROM USER WHERE ID={0}".format(iddu))
-                data = cursor.fetchone()
-                print('1.SI, 2.N0')
-                print('|','Id user:', data[0], ' ', '\t', 'Name user: ',data[1], '\t','old year: ', data[2], '\t', '|')
-                siono = str(input('Este es el usuario que eligio: '))
-                if siono == '1':
-                    print('1.SI, 2.N0')
-                    seguro = str(input('Esta seguro que desea borrar: '))
-                    if seguro == '1':
-                        cursor.execute("DELETE FROM USER WHERE ID={0}".format(iddu))
-                        print('Usuario borrado')
-                    elif seguro == '2':
-                        print('Ejecute de Nuevo')
-                    else:
-                        print('Opcion Invalida')
-                elif siono == '2':
-                    print('Ejecute de Nuevo')
-                else:
-                    print('Valor Invado')
-            elif cambiarop == "4":
-                cursor.execute("SELECT * FROM TABLASNEWS")
-                data = cursor.fetchall()
-                for tabless in data:
-                    print("Name of the table: ", tabless[0])
-                print("1.SI", "\t", "2.NO")
-                obdt = str(input("Desea borrar los datos de la tabla: "))
-                namofthetable = str(input("Name of the table: "))
-                if obdt == "1":
-                    cursor.execute("DROP TABLE '{0}'".format(namofthetable))
-                    print("Datos borrados")#option 2 not created ok 
-                elif obdt == "2":
-                    print("OK")
-            else:
-                print(cambiarop, 'Opcion Invalida')
-            
-            print('FINISH')
+            print("Add to Data Base")
+            i = 1
+            number_of_users = int(input("Number of the users: "))
+            while i <= number_of_users:
+                i = i + 1
+                print("Option for add to Data Base")
+                print("="*20)
+                nombre = str(input("Nombre de la persona: "))
+                print("="*20)
+                edad = int(input("Your age: "))
+                print("="*20)
+                job = str(input("Enter you job: "))
+                print("="*20)
+                salarybyweek = int(input("Salary by hr: "))
+                print("="*20)
+                salarybyhr = int(input("Salary by Week: "))
+                print("="*20)
+
+                var_of_the_use = [
+                   (nombre, edad, job, salarybyhr, salarybyweek)
+                ]
+                cursor.executemany("INSERT INTO USER VALUES (NULL, ?,?,?,?,?)",var_of_the_use)
+                conection.commit()
             conection.commit()
         except:
-            print('Error en rango')
+            print("Error of datas")
+    def show_data_base():
+
+        cursor.execute("SELECT * FROM USER")
+        data = cursor.fetchall()
+        for i in data:
+            print("ID: ", i[0], "NAME: ", i[1], "AGE: ", i[2], "JOBS",i[3], "salary by hr: ", i[4], "salary by week: ", i[5])
+            conection.commit()
+    def change_datas_by_id():
+        try:
+            print("Change datas of the user by ID")
+            id_of_the_user = str(input("Id of the user to Change: "))
+            cursor.execute("SELECT * FROM USER WHERE ID={0}".format(id_of_the_user))
+            data = cursor.fetchone()
+            print("="*20)
+            print("ID: ", data[0], "NAME: ", data[1], "AGE: ", data[2], "JOBS",data[3], "salary by hr: ", data[4], "salary by week: ", data[5])
+            print("1.SI \t 2.NO")
+            yess_and_not = str(input("This is user to change: "))
+            print("="*20)
+            print(" 1.NAME \t 2.OLDYEAR \t 3.JOB \t 4.SalaryBYhr \t 5.SalaryBYWeek")
+            print("="*20)
+            qelqc = str(input("Que desea cambiar: "))
+            if yess_and_not == "1":
+                if qelqc == "1":#change to name
+                    new_name = str(input("New name of the user: "))
+                    cursor.execute("UPDATE USER SET NAME='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
+                    print("Change completed...")
+                    conection.commit()
+                elif qelqc == "2":#change to OLDYEAR
+                    new_name = str(input("New age of the user: "))
+                    cursor.execute("UPDATE USER SET OLDYEAR='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
+                    print("Change completed...")
+                    conection.commit()
+                elif qelqc == "3":#change to JOB
+                    new_name = str(input("New job of the user: "))
+                    cursor.execute("UPDATE USER SET JOB='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
+                    print("Change completed...")
+                    conection.commit()
+                elif qelqc == "4":#change to SalaryBYhr
+                    new_name = str(input("New Salary BY hr of the user: "))
+                    cursor.execute("UPDATE USER SET SalaryBYhr='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
+                    print("Change completed...")
+                    conection.commit()
+                elif qelqc == "5":#change to SalaryBYWeek
+                    new_name = str(input("New Salary BY Week of the user: "))
+                    cursor.execute("UPDATE USER SET SalaryBYWeek='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
+                    print("Change completed...")
+                    conection.commit()
+                else:
+                    print(qelqc, "Not valid")
+            elif yess_and_not == "2":
+                print("Execute la opcion 2 para ver todos los usuarios y asi ver el correcto")
+            else:
+                print(yess_and_not, " Not valid")
+            conection.commit()
+        except:
+            print("Error of datas")
 conection.commit()
+

@@ -1,19 +1,17 @@
 from moduleSearchbyId import sendmail
 from FolderDB import DBcon
 
-print('1.Add to data base', '\n', '2. show data base', '\n', "3.enviar correo", '\n', "4.Mostrar dato especifico por ID",'\n', '5.Cambiar Nombre o edad', '\n', "6.Crear tabla")
+print('1.Add to data base', '\n', '2. show data base', '\n', "3.Mostrar dato especifico por ID",'\n', '4.Cambiar Nombre o edad')
 
 option = str(input('Option: '))
-if option == '1':
-    DBcon.dbcone.agregar()
-elif option == '2':
-    DBcon.dbcone.mostrar()
+if option == "1":
+    print("hi guys")
+    DBcon.dbs.add_to_db()
+elif option == "2":
+	DBcon.dbs.show_data_base()
 elif option == "3":
-    sendmail.sendmailclass.sendmailnow()
+	DBcon.dbs.user_by_ID()
 elif option == "4":
-    DBcon.dbcone.search()
-elif option == '5':
-    DBcon.dbcone.cambiaruser()
+	DBcon.dbs.change_datas_by_id()
 else:
-    print("     ", option, 'Invalida')
-    print('Opcion de valor invalida')
+    print(option, " Not valid")
