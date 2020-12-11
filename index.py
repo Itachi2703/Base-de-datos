@@ -1,7 +1,7 @@
 from moduleSearchbyId import sendmail
 from FolderDB import DBcon
 
-print('1.Add to data base', '\n', '2. show data base', '\n', "3.Mostrar dato especifico por ID",'\n', '4.Cambiar Nombre o edad')
+print("\t",'1.Add to data base', '\n', "\t", '2. show data base', '\n', "\t", "3.Mostrar dato especifico por ID",'\n', "\t", "4.Cambiar Nombre o edad")
 
 option = str(input('Option: '))
 if option == "1":
@@ -14,4 +14,4 @@ elif option == "3":
 elif option == "4":
 	DBcon.dbs.change_datas_by_id()
 else:
-    print(option, " Not valid")
+    print(option, " Not valid OK")
