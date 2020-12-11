@@ -74,26 +74,31 @@ class dbs:#clase de todas las operaciones sobre la base de datos
             qelqc = str(input("Que desea cambiar: "))
             if yess_and_not == "1":
                 if qelqc == "1":#change to name
+                    print("change to name")
                     new_name = str(input("New name of the user: "))
                     cursor.execute("UPDATE USER SET NAME='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
                     print("Change completed...")
                     conection.commit()
                 elif qelqc == "2":#change to OLDYEAR
+                    print("change to OLDYEAR")
                     new_name = str(input("New age of the user: "))
                     cursor.execute("UPDATE USER SET OLDYEAR='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
                     print("Change completed...")
                     conection.commit()
                 elif qelqc == "3":#change to JOB
+                    print("change to JOB")
                     new_name = str(input("New job of the user: "))
                     cursor.execute("UPDATE USER SET JOB='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
                     print("Change completed...")
                     conection.commit()
                 elif qelqc == "4":#change to SalaryBYhr
+                    print("change to salary by hr")
                     new_name = str(input("New Salary BY hr of the user: "))
                     cursor.execute("UPDATE USER SET SalaryBYhr='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
                     print("Change completed...")
                     conection.commit()
                 elif qelqc == "5":#change to SalaryBYWeek
+                    print("change to salary by week")
                     new_name = str(input("New Salary BY Week of the user: "))
                     cursor.execute("UPDATE USER SET SalaryBYWeek='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
                     print("Change completed...")
