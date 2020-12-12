@@ -38,9 +38,9 @@ class dbs:#clase de todas las operaciones sobre la base de datos
                 print("="*20)
                 job = str(input("Enter you job: "))
                 print("="*20)
-                salarybyweek = int(input("Salary by hr: "))
+                salarybyweek = int(input("Salary by week: "))
                 print("="*20)
-                salarybyhr = int(input("Salary by Week: "))
+                salarybyhr = int(input("Salary by hr: "))
                 print("="*20)
 
                 var_of_the_use = [
@@ -61,15 +61,15 @@ class dbs:#clase de todas las operaciones sobre la base de datos
     def change_datas_by_id():
         try:
             print("Change datas of the user by ID")
-            id_of_the_user = str(input("Id of the user to Change: "))
+            id_of_the_user = str(input("Id of the user to Change or delete: "))
             cursor.execute("SELECT * FROM USER WHERE ID={0}".format(id_of_the_user))
             data = cursor.fetchone()
             print("="*20)
             print("ID: ", data[0], "NAME: ", data[1], "AGE: ", data[2], "JOBS",data[3], "salary by hr: ", data[4], "salary by week: ", data[5])
             print("1.SI \t 2.NO")
-            yess_and_not = str(input("This is user to change: "))
+            yess_and_not = str(input("This is user to change or delete: "))
             print("="*20)
-            print(" 1.NAME \t 2.OLDYEAR \t 3.JOB \t 4.SalaryBYhr \t 5.SalaryBYWeek")
+            print(" 1.NAME \t 2.OLDYEAR \t 3.JOB \t 4.SalaryBYhr \t 5.SalaryBYWeek \t 6.Delete to user by ID")
             print("="*20)
             qelqc = str(input("Que desea cambiar: "))
             if yess_and_not == "1":
@@ -97,6 +97,10 @@ class dbs:#clase de todas las operaciones sobre la base de datos
                     cursor.execute("UPDATE USER SET SalaryBYhr='{0}' WHERE ID={1}".format(new_name, id_of_the_user))
                     print("Change completed...")
                     conection.commit()
+                elif qelqc == "6":
+                    print("Delete to user by ID")
+                    cursor.execute("DELETE FROM USER WHERE ID={0}".format(id_of_the_user))
+                    print("completed...")
                 elif qelqc == "5":#change to SalaryBYWeek
                     print("change to salary by week")
                     new_name = str(input("New Salary BY Week of the user: "))
@@ -113,4 +117,3 @@ class dbs:#clase de todas las operaciones sobre la base de datos
         except:
             print("Error of datas")
 conection.commit()
-
